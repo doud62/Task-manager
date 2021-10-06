@@ -1,0 +1,35 @@
+// Place all the styles related to the tasks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.task-description{
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.form-check-input{
+ margin-right: 1em;
+}
+
+.card{
+  width: 100%;
+}
+
+.edit-icon{
+  text-decoration: none;
+  color: grey;
+  font-size: 1.3em;
+  :hover{
+    color: black;
+  }
+}
+
+.delete-icon{
+  text-decoration: none;
+  color: grey;
+  font-size: 1.3em;
+  :hover{
+    color: red;
+  }
+}

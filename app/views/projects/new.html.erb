@@ -1,0 +1,8 @@
+<%= simple_form_for [@project] do |f| %>
+  <div class="input-group">
+    <%= f.input :name, class: 'form-control' %>
+    <div class="input-group-append">
+      <%= f.submit value: "Créer", class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

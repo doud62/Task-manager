@@ -1,0 +1,7 @@
+<%= simple_form_for [@project, @task] do |f| %>
+  <%= f.input :name %>
+  <%= f.input :text, as: :text, input_html: {class: " tinymce" } %>
+  <%= tinymce %>
+  <%= f.input :date %>
+  <%= f.submit value: "Créer" %>
+<% end %>

@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-body">
+    <h2 class='card-title d-flex justify-content-between mb-4'>
+      <span><%= @project.name %></span>
+      <%= link_to "Créer une tâche", new_project_task_path(@project), class: 'btn btn-primary' %>
+    </h2>
+
+    <% @project.tasks.each do |task| %>
+    <div class="task-description">
+      <%= simple_form_for [@project, task] do |f| %>
+        <%= f.check_box :done, class: 'form-check-input', onchange: "form.submit();" %>
+      <% end %>
+
+          <%= link_to project_task_path(@project, task), class: 'text-decoration-none' do %>
+            <div class="card">
+              <div class="card-body pb-2">
+                <h5 class='card-title text-dark'><b><%= task.name %></b></h5>
+                <p class='text'><%= strip_tags(task.text).truncate(250) %></p>
+
+                <%= link_to edit_project_task_path(@project, task), class: 'edit-icon' do %><i class="fa fa-edit"></i><% end %>
+                <%= link_to project_task_path(@project, task), class: 'delete-icon', data: { confirm: 'Êtes-vous sûr de supprimer cette tâche ?' }, method: :delete do%><i class="fa fa-trash"></i><% end %>
+              </div>
+            </div>
+        <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

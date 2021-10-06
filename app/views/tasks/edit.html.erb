@@ -1,0 +1,13 @@
+<div class="mb-3">
+  
+<%= simple_form_for [@project, @task] do |f| %>
+  <label for="name" class="form-label">Titre de la tâche</label>
+  <%= f.input :name, class: 'form-control', label: false, placeholder: 'Mon titre' %>
+  
+  <%= f.input :text, as: :text, input_html: { class: " tinymce" } %>
+  <%= tinymce %>
+  <%= f.input :date, class: 'form-control' %>
+  <%= f.submit value: "Modifier", class: 'btn btn-primary' %>
+<% end %>
+
+</div>
