@@ -7,7 +7,7 @@
 
     <% @project.tasks.each do |task| %>
     <div class="task-description">
-      <%= simple_form_for [@project, task] do |f| %>
+      <%= simple_form_for([@project, task], remote: true, authenticity_token: true) do |f| %>
         <%= f.check_box :done, class: 'form-check-input', onchange: "form.submit();" %>
       <% end %>
 
