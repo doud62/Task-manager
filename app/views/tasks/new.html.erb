@@ -1,7 +1,9 @@
 <%= simple_form_for [@project, @task] do |f| %>
-  <%= f.input :name %>
-  <%= f.input :text, as: :text, input_html: {class: " tinymce" } %>
+  <%= f.input :name, input_html: {class: "mb-3" }, label: "Titre de la tâche" %>
+  <%= f.input :text, input_html: {class: "tinymce" }, label: false %>
   <%= tinymce %>
-  <%= f.input :date %>
-  <%= f.submit value: "Créer" %>
+  <div class="mt-3">
+    <%= f.input :date %>
+  </div>
+  <%= f.submit value: "Créer une tâche", class: 'btn btn-primary mt-3' %>
 <% end %>

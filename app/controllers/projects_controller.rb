@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    find_project
   end
 
   def create
@@ -21,14 +21,31 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def edit
+    @project = current_user.projects.find(params[:id])
+  end
+
+  def update
+    @project = current_user.projects.find(params[:id])
+    if @project.update(project_params)
+      redirect_to projects_path
+    else
+      render :edit
+    end
+  end
+
   def destroy
-    @project = Project.find(params[:id])
+    find_project
     @project.destroy!
     
     redirect_to projects_path
   end
 
   private
+
+  def find_project
+    @project = Project.find(params[:id])
+  end
 
   def project_params
     params.require(:project).permit(:name, user_id: current_user.id)
