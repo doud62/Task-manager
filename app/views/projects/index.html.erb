@@ -13,6 +13,7 @@
               <h5 class='card-title text-dark'><b><%= project.name %></b></h5>
               <p class='text-secondary'><%= project.tasks.count %> tâche<%= "s" if project.tasks.count > 1 %></p>
 
+              <%= link_to edit_project_path(project), class: 'edit-icon' do %><i class="fa fa-edit"></i><% end %>
               <%= link_to project, class: 'delete-icon', data: { confirm: 'Êtes-vous sûr de supprimer ce projet et les tâches qu\'il contient ?' }, method: :delete do%><i class="fa fa-trash"></i><% end %>
             </div>
           </div>
