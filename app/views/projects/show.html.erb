@@ -4,25 +4,76 @@
       <span><%= @project.name %></span>
       <%= link_to "Créer une tâche", new_project_task_path(@project), class: 'btn btn-primary' %>
     </h2>
+    
+    <% if (((@project.tasks.count { |x| x.done == true }) * 100) / @project.tasks.count rescue 0) > 0%>
+      <div class="progress mb-4" style="height: 2em;">
+        <div class="progress-bar" role="progressbar" style="width: <%= ((@project.tasks.count { |x| x.done == true }) * 100) / @project.tasks.count rescue 0 %>%;" aria-valuenow="<%= ((@project.tasks.count { |x| x.done == true }) * 100) / @project.tasks.count rescue 0 %>" aria-valuemin="0" aria-valuemax="100"><%= ((@project.tasks.count { |x| x.done == true }) * 100) / @project.tasks.count rescue 0 %>% des tâches réalisées</div>
+      </div>
+    <% end %>
 
-    <% @project.tasks.each do |task| %>
-    <div class="task-description">
-      <%= simple_form_for([@project, task], remote: true, authenticity_token: true) do |f| %>
-        <%= f.check_box :done, class: 'form-check-input', onchange: "form.submit();" %>
-      <% end %>
+<div class="card mb-4">
+  <h5 class="card-header mb-3">Tâches en cours (<%= @project.tasks.where(done: false).count %>/<%= @project.tasks.count %>)</h5>
+    <% if @project.tasks.where(done: false).count > 0 %>
+      <% @project.tasks.each do |task| %>
+        <% if task.done == false %>
+            <div class="task-description mx-3">
+              <%= simple_form_for([@project, task], remote: true, authenticity_token: true) do |f| %>
+                <%= f.check_box :done, class: 'form-check-input', onchange: "form.submit();" %>
+              <% end %>
 
-          <%= link_to project_task_path(@project, task), class: 'text-decoration-none' do %>
-            <div class="card">
-              <div class="card-body pb-2">
-                <h5 class='card-title text-dark'><b><%= task.name %></b></h5>
-                <p class='text'><%= strip_tags(task.text).truncate(250) %></p>
+              <%= link_to project_task_path(@project, task), class: 'text-decoration-none' do %>
+                <div class="card">
+                  <div class="card-body pb-2">
+                    <h5 class='card-title text-dark'><b><%= task.name %></b></h5>
+                    <p class='text'><%= strip_tags(task.text).truncate(250) %></p>
 
-                <%= link_to edit_project_task_path(@project, task), class: 'edit-icon' do %><i class="fa fa-edit"></i><% end %>
-                <%= link_to project_task_path(@project, task), class: 'delete-icon', data: { confirm: 'Êtes-vous sûr de supprimer cette tâche ?' }, method: :delete do%><i class="fa fa-trash"></i><% end %>
-              </div>
+                    <%= link_to edit_project_task_path(@project, task), class: 'edit-icon' do %><i class="fa fa-edit"></i><% end %>
+                    <%= link_to project_task_path(@project, task), class: 'delete-icon', data: { confirm: 'Êtes-vous sûr de supprimer cette tâche ?' }, method: :delete do%><i class="fa fa-trash"></i><% end %>
+                  </div>
+                </div>
+              <% end %>
             </div>
         <% end %>
-    </div>
+      <% end %>
+    <% elsif @project.tasks.count > 0%>
+      <div class="task-description mx-3">
+        Bravo ! Toutes les tâches sont terminées.
+      </div>
+    <% else %>
+      <div class="task-description mx-3">
+        Aucune tâche en cours
+      </div>
     <% end %>
-  </div>
+</div>
+
+    
+<div class="card">
+  <h5 class="card-header mb-3">Tâches terminées (<%= @project.tasks.where(done: true).count %>/<%= @project.tasks.count %>)</h5>
+  <% if @project.tasks.where(done: true).count > 0 %>
+    <% @project.tasks.each do |task| %>
+      <% if task.done %>
+          <div class="task-description mx-3">
+            <%= simple_form_for([@project, task], remote: true, authenticity_token: true) do |f| %>
+              <%= f.check_box :done, class: 'form-check-input', onchange: "form.submit();" %>
+            <% end %>
+
+            <%= link_to project_task_path(@project, task), class: 'text-decoration-none' do %>
+              <div class="card">
+                <div class="card-body pb-2">
+                  <h5 class='card-title text-dark'><b><%= task.name %></b></h5>
+                  <p class='text'><%= strip_tags(task.text).truncate(250) %></p>
+
+                  <%= link_to edit_project_task_path(@project, task), class: 'edit-icon' do %><i class="fa fa-edit"></i><% end %>
+                  <%= link_to project_task_path(@project, task), class: 'delete-icon', data: { confirm: 'Êtes-vous sûr de supprimer cette tâche ?' }, method: :delete do%><i class="fa fa-trash"></i><% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+      <% end %>
+    <% end %>
+  <% else %>
+      <div class="task-description mx-3">
+        Aucune tâche n'est terminée.
+      </div>
+    <% end %>
 </div>

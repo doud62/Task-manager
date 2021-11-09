@@ -1,10 +1,39 @@
-<ul>
-  <li><%= link_to "Inscription", new_user_registration_path %></li>
-  <li><%= link_to "Connexion", new_user_session_path %></li>
-  <li><%= link_to "Deconnexion", destroy_user_session_path, method: :delete %></li>
-</ul>
+<div class="card">
+  <div class="card-body">
+  <h2 class='card-title d-flex justify-content-between mb-4'>Dashboard</h2>
+    <% if user_signed_in? %>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= current_user.projects.count %> projet<%= "s" if current_user.projects.count > 1 %></h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= current_user.tasks.count %> tâche<%= "s" if current_user.projects.count > 1 %></h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= current_user.tasks.where(done: false).count %> tâche<%= "s" if current_user.tasks.where(done: false).count > 1 %> en cours</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= current_user.tasks.where(done: true).count %> tâche<%= "s" if current_user.tasks.where(done: true).count > 1 %> terminée<%= "s" if current_user.tasks.where(done: true).count > 1 %></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-<% if user_signed_in? %>
-  <%= link_to "Créer un projet", new_project_path %>
-  <%= link_to "Voir mes projets", projects_path %>
-<% end %>
+
