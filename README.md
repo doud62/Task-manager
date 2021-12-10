@@ -1,24 +1,37 @@
-# README
+# TASK MANAGER
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+I've created this task manager with Ruby on Rails. It helps you to organize your work in different projects. Within your projects, you can create tasks with a great WYSIWYG HTML editor. Once a task is complete, you can mark it as done and see the state of completion of your tasks.
 
-Things you may want to cover:
+## ⚙️ Stack
+- Ruby/Ruby on Rails
+- Turbolinks gem (with the task complete checkbox)
+- [TinyMCE WYSIWYG HTML editor](https://www.tiny.cloud "TinyMCE WYSIWYG") 
+- Bootstrap
+- Heroku
 
-* Ruby version
+## 🖥 Features
+- Create multiple projects
+- Within a project, you can create multiple tasks
+- For each task, you can add text with a WYSIWYG HTML editor
+- Mark a task as done
+- See the state of completion of your tasks
 
-* System dependencies
+### ➡️ **https://task-manager-eb.herokuapp.com**
 
-* Configuration
+------------
 
-* Database creation
+![Dashboard](https://raw.githubusercontent.com/doud62/Task-manager/master/dashboard.png)
+> Dashboard
 
-* Database initialization
+![Projects list](https://raw.githubusercontent.com/doud62/Task-manager/master/projets.png)
+> Projects list
 
-* How to run the test suite
+![A project with 50% of tasks completed](https://raw.githubusercontent.com/doud62/Task-manager/master/peinture.png)
+>A project with 50% of tasks completed
 
-* Services (job queues, cache servers, search engines, etc.)
+![A project with 100% of tasks completed](https://raw.githubusercontent.com/doud62/Task-manager/master/jardinage.png)
+>A project with 100% of tasks completed
 
-* Deployment instructions
 
-* ...
+![Task editor](https://raw.githubusercontent.com/doud62/Task-manager/master/tache.png)
+>Task editor with [TinyMCE](https://www.tiny.cloud "TinyMCE")
